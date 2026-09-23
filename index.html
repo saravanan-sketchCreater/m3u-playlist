@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>M3U Player</title>
+<style>
+body{margin:0;background:#111;color:#fff;font-family:Arial,sans-serif}header{padding:18px;text-align:center;background:#1d1d1d}main{max-width:1000px;margin:auto;padding:16px}video{width:100%;max-height:65vh;background:#000;border-radius:10px}input{width:100%;box-sizing:border-box;padding:12px;margin:14px 0;background:#222;color:#fff;border:1px solid #444;border-radius:8px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}.channel{padding:14px;background:#222;border:1px solid #333;border-radius:8px;cursor:pointer}.channel:hover{background:#333}.muted{color:#aaa;text-align:center;padding:20px}
+</style>
+</head>
+<body>
+<header><h2>📺 M3U Player</h2></header>
+<main>
+<video id="player" controls playsinline></video>
+<input id="search" placeholder="🔍 Search channel...">
+<div id="channels" class="grid"></div>
+<div id="status" class="muted">Loading playlist...</div>
+</main>
+<script>
+const M3U='https://raw.githubusercontent.com/saravanan-sketchCreater/m3u-playlist/main/playlist.m3u';
+let list=[];
+function parseM3U(text){const lines=text.split(/\r?\n/);let out=[];for(let i=0;i<lines.length;i++){if(lines[i].startsWith('#EXTINF')){const name=lines[i].split(',').slice(1).join(',').trim()||'Channel';let url='';for(let j=i+1;j<lines.length;j++){if(lines[j].trim()&&!lines[j].startsWith('#')){url=lines[j].trim();break}}if(url)out.push({name,url})}}return out}
+function render(items){const box=document.getElementById('channels');box.innerHTML='';document.getElementById('status').textContent=items.length?`${items.length} channel(s)`: 'No channels found';items.forEach(c=>{const d=document.createElement('div');d.className='channel';d.textContent=c.name;d.onclick=()=>play(c.url);box.appendChild(d)})}
+function play(url){const p=document.getElementById('player');p.src=url;p.play().catch(()=>{});p.scrollIntoView({behavior:'smooth',block:'center'})}
+fetch(M3U).then(r=>{if(!r.ok)throw Error('Playlist HTTP '+r.status);return r.text()}).then(t=>{list=parseM3U(t);render(list)}).catch(e=>document.getElementById('status').textContent='Playlist load failed: '+e.message);
+document.getElementById('search').addEventListener('input',e=>{const q=e.target.value.toLowerCase();render(list.filter(c=>c.name.toLowerCase().includes(q)))})
+</script>
+</body>
+</html>
