@@ -10,7 +10,7 @@ http://103.17.193.159:5001/live/3622.m3u8
 #EXTINF:-1 tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrUyhb6pL3s1RNFerkq4kXws-WmM3rsp5gIsFhQRpOjQ&s=10" tvg-name="Sony vizha HD" group-title="Tamil",Sony vizha HD
 https://jiotvmblive.cdn.jio.com/bpk-tv/SonyVizha_MOB/WDVLive/index.mpd
 #EXTINF:-1 tvg-ID="" tvg-name="DISNEY CHANNEL"  group-title="NIÑOS",DISNEY CHANNEL
-http://198.245.53.172:8970/live/QFFB6QJ9D6CX/QPG9XA4T294F/54.ts
+http://60.251.59.178:8507/.m3u8
 #EXTINF:-1 tvg-ID="" tvg-name="DISNEY JR"  group-title="NIÑOS",DISNEY JR
 http://198.245.53.172:8970/live/QFFB6QJ9D6CX/QPG9XA4T294F/55.ts
 #EXTINF:-1 tvg-logo="https://sund-images.sunnxt.com/195491/640x360_SunTVHDDolbyVision_195491_8110232c-dd00-4dbe-98ff-25bf5fe8749e.jpg" tvg-name="Sun TV HDR - Dolby Vision" group-title="SunNxt",Sun TV HDR - Dolby Vision
